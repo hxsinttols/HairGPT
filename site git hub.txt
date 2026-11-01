@@ -1,0 +1,49 @@
+# Recherche par nom + ville
+curl -X POST https://api.brixhub.ru/api/v1/search \
+  -H "Content-Type: application/json" \
+  -d '{"nom_famille": "martin", "ville": "lyon", "per_page": 20}'
+
+
+const r = await fetch("https://api.brixhub.ru/api/v1/search", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ nom_famille: "martin", ville: "lyon" }),
+})
+const { data, meta } = await r.json()
+const { results } = data  // meta: { total, page, pages, ... }
+Python
+
+import requests
+r = requests.post("https://api.brixhub.ru/api/v1/search", json={
+    "nom_famille": "martin",
+    "ville": "lyon",
+    "per_page": 20,
+})
+resp = r.json()  # {status, message, data, meta, timestamp}
+results = resp['data']['results']  # meta: total, page, pages, ...
+
+
+
+
+Requête
+Corps JSON : un ou plusieurs champs de recherche ci-dessous, pluspage,per_page etflexible (recherche approximative). Toute clé inconnue est ignorée.
+
+Identité
+
+nom_famille, prenom, nom_naissance, nom_affichage, nom_utilisateur, genre, civilite, date_naissance, annee_naissance, jour_naissance, mois_naissance
+
+Contact
+
+email, telephone, mobile, adresse_ip, discord_id
+
+Localisation
+
+adresse, complement_adresse, ville, code_postal, departement, region, pays, ville_naissance, lieu_naissance
+
+Professionnel & véhicules
+
+societe, profession, fonction, siret, siren, marque, modele, vin_plaque, immatriculation, numero_serie
+
+Bancaire & gaming
+
+iban, bic, steam_id, fivem_license, fivem_license2, fivem_id, xbox_live_id, live_id
